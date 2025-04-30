@@ -42,7 +42,6 @@ return {
 						vim.fn.expand '$HOME/.pub-cache',
 						vim.fn.expand '$HOME/fvm',
 					},
-					lineLength = vim.g.flutter_format_line_length,
 				},
 			},
 			dev_log = {
