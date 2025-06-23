@@ -39,7 +39,6 @@ require("lazy").setup({
 	require("plugins.tabline"),
 	require("plugins.autocomplete").config,
 	require("plugins.debugger"),
-	-- require("plugins.lspconfig").config,
 	require("plugins.lsp"),
 	require("plugins.flutter"),
 	require("plugins.go"),
