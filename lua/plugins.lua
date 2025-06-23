@@ -69,9 +69,9 @@ require("lazy").setup({
 }, {
 })
 
-require("plugin.vertical_cursor_movement")
+require("custom_plugins.vertical_cursor_movement")
 
-local swap_ternary = require("plugin.swap_ternary")
+local swap_ternary = require("custom_plugins.swap_ternary")
 vim.keymap.set("n", "<leader>st", swap_ternary.swap_ternary, { noremap = true })
 
-require("plugin.compile_run")
+require("custom_plugins.compile_run")
