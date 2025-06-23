@@ -23,7 +23,7 @@ local dartColonFirst = function(entry1, entry2)
 	return nil
 end
 
-local dartColonFirst = function(entry1, entry2)
+local pythonUnderscoreLast = function(entry1, entry2)
 	if vim.bo.filetype ~= "python" then
 		return nil
 	end
@@ -170,7 +170,10 @@ M.configfunc = function()
 			format = function(entry, vim_item)
 				local kind = lspkind.cmp_format({
 					mode = "symbol_text",
-					symbol_map = { Codeium = "", },
+					symbol_map = {
+						Codeium = "",
+						TypeParameter = "",
+					},
 				})(entry, vim_item)
 				local strings = vim.split(kind.kind, "%s", { trimempty = true })
 				kind.kind = " " .. (strings[1] or "") .. " "
