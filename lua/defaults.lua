@@ -8,6 +8,7 @@ vim.o.secure = false
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.cursorline = true
+vim.o.signcolumn = "yes:1"
 vim.o.expandtab = false
 vim.o.tabstop = 2
 vim.o.smarttab = true
@@ -88,7 +89,7 @@ tnoremap <C-O> <C-\><C-N><C-O>
 vim.cmd([[hi NonText ctermfg=gray guifg=grey10]])
 
 local config_path = vim.fn.stdpath("config")
-local current_config_path = config_path .. "/lua/config/machine_specific.lua"
+local current_config_path = config_path .. "/lua/machine_specific.lua"
 if not vim.loop.fs_stat(current_config_path) then
 	local current_config_file = io.open(current_config_path, "wb")
 	local default_config_path = config_path .. "/default_config/_machine_specific_default.lua"
@@ -100,4 +101,6 @@ if not vim.loop.fs_stat(current_config_path) then
 		io.close(current_config_file)
 	end
 end
-require("config.machine_specific")
+require("machine_specific")
+
+vim.cmd([[command! SudoSave w !sudo tee % > /dev/null]])

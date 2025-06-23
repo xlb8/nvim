@@ -44,14 +44,6 @@ M.config = {
 			-- "mjlbach/lsp_signature.nvim",
 			"airblade/vim-rooter",
 			"b0o/schemastore.nvim",
-			{
-				'laytan/tailwind-sorter.nvim',
-				dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-lua/plenary.nvim' },
-				build = 'cd formatter && npm ci && npm run build',
-				opts = {
-					on_save_enabled = true,
-				}
-			},
 		},
 
 		config = function()
@@ -60,7 +52,7 @@ M.config = {
 
 			require('mason').setup({})
 			require('mason-lspconfig').setup({
-				ensure_installed = {
+				automatic_installation = {
 					"biome",
 					"cssls",
 					'ts_ls',
@@ -223,7 +215,7 @@ M.config = {
 				}
 			})
 
-			require 'lspconfig'.gopls.setup {}
+			-- require 'lspconfig'.gopls.setup {}
 
 			lsp.setup()
 

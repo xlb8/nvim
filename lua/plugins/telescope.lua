@@ -119,6 +119,19 @@ M.config = {
 					grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 				},
 				pickers = {
+					find_files = {
+						find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
+						mappings = {
+							n = {
+								["cd"] = function(prompt_bufnr)
+									local selection = require("telescope.actions.state").get_selected_entry()
+									local dir = vim.fn.fnamemodify(selection.path, ":p:h")
+									require("telescope.actions").close(prompt_bufnr)
+									vim.cmd(string.format("silent lcd %s", dir))
+								end
+							}
+						}
+					},
 					buffers = {
 						show_all_buffers = true,
 						sort_lastused = true,
