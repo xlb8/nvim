@@ -203,6 +203,17 @@ M.config = {
 					desc = "Git diff",
 					cmd = "<CMD>Telescope git_status<CR>",
 				},
+				{
+					desc = "Restart Dart LSP",
+					cmd = function()
+						vim.lsp.start({
+							name = 'dartls',
+							cmd = { 'dart', 'language-server', '--protocol=lsp' },
+							root_dir = vim.fn
+									.getcwd()
+						})
+					end,
+				},
 			})
 		end
 	}

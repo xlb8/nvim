@@ -19,3 +19,11 @@ local toggle_log = function()
 end
 
 vim.keymap.set('n', "<leader>'l", toggle_log, { noremap = true })
+vim.keymap.set('n', "<leader>'pr", function()
+	vim.lsp.start({
+		name = 'dartls',
+		cmd = { 'dart', 'language-server', '--protocol=lsp' },
+		root_dir = vim.fn
+				.getcwd()
+	})
+end, { noremap = true })

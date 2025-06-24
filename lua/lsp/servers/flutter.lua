@@ -58,7 +58,8 @@ function M.setup()
 				{
 					filter = 'raised',
 					label = 'Exceptions',
-					condition = "!(url:startsWith('package:flutter/') || url:startsWith('package:flutter_test/') || url:startsWith('package:dartpad_sample/') || url:startsWith('package:flutter_localizations/'))"
+					condition =
+					"!(url:startsWith('package:flutter/') || url:startsWith('package:flutter_test/') || url:startsWith('package:dartpad_sample/') || url:startsWith('package:flutter_localizations/'))"
 				}
 			},
 			register_configurations = function(_)
@@ -87,3 +88,4 @@ function M.setup()
 end
 
 return M
+
