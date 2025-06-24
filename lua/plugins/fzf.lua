@@ -1,6 +1,7 @@
 local m = { noremap = true }
 return {
-	"theniceboy/fzf-lua",
+	"ibhagwan/fzf-lua",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 	keys = { "<c-f>" },
 	config = function()
 		local fzf = require('fzf-lua')
