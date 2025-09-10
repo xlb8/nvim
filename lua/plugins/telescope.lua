@@ -206,11 +206,17 @@ M.config = {
 				{
 					desc = "Restart Dart LSP",
 					cmd = function()
+						-- Kill existing dartls clients
+						local clients = vim.lsp.get_active_clients({ name = 'dartls' })
+						for _, client in ipairs(clients) do
+							client.stop()
+						end
+
+						-- Start new one
 						vim.lsp.start({
 							name = 'dartls',
 							cmd = { 'dart', 'language-server', '--protocol=lsp' },
-							root_dir = vim.fn
-									.getcwd()
+							root_dir = vim.fn.getcwd()
 						})
 					end,
 				},
