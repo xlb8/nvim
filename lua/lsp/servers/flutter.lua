@@ -26,7 +26,7 @@ function M.setup()
 	flutter.setup({
 		fvm = true,
 		widget_guides = {
-			enabled = true,
+			enabled = false,
 		},
 		ui = {
 			border = "rounded",
@@ -88,4 +88,3 @@ function M.setup()
 end
 
 return M
-
