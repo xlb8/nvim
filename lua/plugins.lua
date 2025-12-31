@@ -30,6 +30,7 @@ end
 vim.keymap.set("n", "<leader>pl", ":Lazy<CR>", { noremap = true })
 
 require("lazy").setup({
+	require("plugins.yank"),
 	require("plugins.telescope").config,
 	require("plugins.fzf"),
 	require("plugins.ui"),
@@ -40,36 +41,31 @@ require("lazy").setup({
 	require("plugins.autocomplete").config,
 	require("plugins.debugger"),
 	require("plugins.lsp"),
-	require("plugins.flutter"),
-	require("plugins.go"),
 	require("plugins.treesitter"),
 	require("plugins.comment"),
 	require("plugins.surround"),
 	require("plugins.project"),
 	require("plugins.wilder"),
 	require("plugins.multi-cursor"),
-	require("plugins.copilot"),
-	require("plugins.markdown"),
+	-- require("plugins.copilot"),
+	-- require("plugins.markdown"),
 	require("plugins.git"),
 	-- require("plugins.indent"),
 	require("plugins.search"),
-	require("plugins.yank"),
 	require("plugins.snippets"),
 	require("plugins.window-management"),
 	require("plugins.undo"),
-	require("plugins.ft"),
 	require("plugins.fun"),
 	require("plugins.winbar"),
 	require("plugins.leap"),
-	require("plugins.tex"),
 	require("plugins.yazi"),
 	{ "dstein64/vim-startuptime" },
 }, {
 })
 
-require("custom_plugins.vertical_cursor_movement")
+-- require("custom_plugins.vertical_cursor_movement")
 
-local swap_ternary = require("custom_plugins.swap_ternary")
-vim.keymap.set("n", "<leader>st", swap_ternary.swap_ternary, { noremap = true })
+-- local swap_ternary = require("custom_plugins.swap_ternary")
+-- vim.keymap.set("n", "<leader>st", swap_ternary.swap_ternary, { noremap = true })
 
-require("custom_plugins.compile_run")
+-- require("custom_plugins.compile_run")

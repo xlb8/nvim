@@ -1,5 +1,5 @@
 return {
-	"nvim-treesitter/playground",
+	-- {"nvim-treesitter/playground"},
 	{
 		"nvim-treesitter/nvim-treesitter",
 		lazy = false,
@@ -7,28 +7,11 @@ return {
 		build = ":TSUpdate",
 		config = function()
 			vim.opt.smartindent = false
-			require("nvim-treesitter.configs").setup({
+			require("nvim-treesitter.config").setup({
 				auto_install = true,
 				sync_install = false,
 				ensure_installed = {
-					"markdown",
-					"html",
-					"javascript",
-					"typescript",
-					"tsx",
-					"query",
-					"dart",
-					"java",
-					"c",
-					"prisma",
-					"bash",
-					"go",
 					"lua",
-					"kdl",
-					"vim",
-					"terraform",
-					"dockerfile",
-					"yaml",
 					"python",
 				},
 				highlight = {
@@ -37,10 +20,6 @@ return {
 				},
 				indent = {
 					enable = true,
-					disable = function(lang, bufnr)
-						local disallowed_filetypes = { "yaml", "dart" }
-						return vim.tbl_contains(disallowed_filetypes, lang)
-					end,
 				},
 				incremental_selection = {
 					enable = true,

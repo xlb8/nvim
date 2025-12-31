@@ -4,7 +4,6 @@ local M = {}
 M.config = {
 	{
 		"nvim-telescope/telescope.nvim",
-		-- dir = "/Users/david/.config/nvim/_local_plugins/telescope.nvim",
 		-- tag = '0.1.1',
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
@@ -15,7 +14,7 @@ M.config = {
 					local tstabs = require('telescope-tabs')
 					tstabs.setup({
 					})
-					vim.keymap.set('n', '<c-t>', tstabs.list_tabs, {})
+					vim.keymap.set('n', '<c-f>', tstabs.list_tabs, {})
 				end
 			},
 			{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
@@ -25,7 +24,7 @@ M.config = {
 		},
 		config = function()
 			local builtin = require('telescope.builtin')
-			vim.keymap.set('n', '<c-p>', builtin.find_files, m)
+			vim.keymap.set('n', '<c-r>', builtin.find_files, m)
 			-- vim.keymap.set('n', '<c-f>', function()
 			-- 	builtin.grep_string({ search = "" })
 			-- end, m)
@@ -69,7 +68,7 @@ M.config = {
 			-- vim.keymap.set('n', 'gd', builtin.lsp_definitions, m)
 			-- vim.keymap.set('n', '<c-t>', builtin.lsp_document_symbols, {})
 			vim.keymap.set('n', 'gi', builtin.git_status, m)
-			vim.keymap.set("n", ":", builtin.commands, m)
+			vim.keymap.set("n", "gp", builtin.commands, m)
 
 			local trouble = require("trouble.providers.telescope")
 
@@ -176,7 +175,6 @@ M.config = {
 				apple_simulator = true,
 			})
 			-- ts.load_extension("ui-select")
-			ts.load_extension("flutter")
 			local tsdap = ts.extensions.dap;
 			-- vim.keymap.set("n", "<leader>'v", tsdap.variables, m)
 			-- vim.keymap.set("n", "<leader>'a", tsdap.commands, m)
@@ -186,6 +184,9 @@ M.config = {
 	},
 	{
 		"FeiyouG/commander.nvim",
+		dependencies = {
+			"nvim-neoclip.lua",
+		},
 		config = function()
 			local commander = require("commander")
 			commander.setup({
@@ -202,29 +203,6 @@ M.config = {
 				{
 					desc = "Git diff",
 					cmd = "<CMD>Telescope git_status<CR>",
-				},
-				{
-					desc = "Restart Dart LSP",
-					cmd = function()
-						local bufnr = vim.api.nvim_get_current_buf()
-						local clients = vim.lsp.get_active_clients({ name = 'dartls' })
-						for _, client in ipairs(clients) do
-							if vim.lsp.buf_is_attached(bufnr, client.id) then
-								vim.lsp.buf_detach_client(bufnr, client.id)
-							end
-						end
-
-						vim.lsp.start({
-							name = 'dartls',
-							cmd = { 'dart', 'language-server', '--protocol=lsp' },
-							root_dir = vim.fn.getcwd()
-						}, {
-							bufnr = bufnr,
-							reuse_client = function()
-								return false
-							end,
-						})
-					end,
 				},
 			})
 		end

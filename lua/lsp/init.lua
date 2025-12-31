@@ -71,58 +71,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- Load server configurations
 require('lsp.servers.lua').setup()
-require('lsp.servers.flutter').setup()
-require('lsp.servers.typescript').setup()
 require('lsp.servers.python').setup()
-require('lsp.servers.go').setup()
-require('lsp.servers.web').setup()
-require('lsp.servers.tex').setup()
-require('lsp.servers.misc').setup()
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-	ensure_installed = {
-		"biome",
-		"cssls",
-		'ts_ls',
-		'eslint',
-		'gopls',
-		'jsonls',
-		'html',
-		'clangd',
-		'dockerls',
-		'ansiblels',
-		'terraformls',
-		'texlab',
-		'pyright',
-		'yamlls',
-		'tailwindcss',
-		'taplo',
-		"prismals",
-	},
+	-- ensure_installed = {
+	-- 	"pyright",
+	-- },
 	automatic_enable = true,
 })
 
 -- Format on save
 local format_on_save_filetypes = {
-	dart = true,
-	json = true,
-	go = true,
-	lua = true,
-	html = true,
-	css = true,
-	javascript = true,
-	typescript = true,
-	typescriptreact = true,
-	c = true,
-	cpp = true,
-	objc = true,
-	objcpp = true,
-	dockerfile = true,
-	terraform = false,
-	tex = true,
-	toml = true,
-	prisma = true,
+	python = true,
 }
 
 vim.api.nvim_create_autocmd("BufWritePre", {

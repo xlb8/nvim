@@ -17,8 +17,15 @@ function M.setup()
 		}
 	})
 
+	
+	vim.lsp.config('ruff', {
+		cmd = { 'ruff', 'server' },
+		filetypes = { 'python' },
+		root_markers = { 'pyproject.toml', '.git' },
+	})
 	-- Enable the server
-	vim.lsp.enable('pyright')
+	vim.lsp.enable({ 'pyright', 'ruff' })
+
 end
 
 return M
