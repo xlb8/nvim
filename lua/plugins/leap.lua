@@ -64,10 +64,10 @@ return {
 			-- 	},
 			modes = {
 				search = {
-					enabled = false,
+					enabled = true,
 				},
 				char = {
-					enabled = false,
+					enabled = true,
 				},
 				treesitter = {
 					labels = labels,
