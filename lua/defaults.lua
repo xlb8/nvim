@@ -2,6 +2,7 @@ vim.o.termguicolors = true
 vim.env.NVIM_TUI_ENABLE_TRUE_COLOR = 1
 
 vim.o.ttyfast = true
+vim.o.mouse = "a"
 vim.o.autochdir = true
 vim.o.exrc = true
 vim.o.secure = false
@@ -40,7 +41,7 @@ vim.o.completeopt = 'longest,noinsert,menuone,noselect,preview'
 vim.o.completeopt = 'menuone,noinsert,noselect,preview'
 -- vim.o.lazyredraw = true
 vim.o.visualbell = true
-vim.o.colorcolumn = '100'
+-- vim.o.colorcolumn = '100'
 vim.o.updatetime = 100
 vim.o.virtualedit = 'block'
 

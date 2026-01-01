@@ -1,56 +1,78 @@
-# 键位映射（Colemak 布局友好）
+# 当前快捷键梳理
 
-## 基础 / 插入
-- `k`: 进入插入模式（原 `i`）；`Q`: 退出窗口；`S`: 保存。
-- 规则：所有用到 `i` 的组合改用 `k`（如 `ciw`→`ckw`）。
-- 插入模式：`Ctrl+a` 行尾；`Ctrl+u` 把光标右侧字符移至行尾。
+## 约定与基础
+- `leader` = `Space`，`localleader` = `,`。
+- 插入模式：`<C-u>` 调用自定义补全括号函数（覆盖原本删除到行首）；CMP 内部常用 `<C-o>` 触发补全，`<C-e>/<C-n>` 跳转片段占位，`<C-f>` 关闭弹窗并回退，`<CR>` 仅在有选中项时确认。
+- 终端模式：`<C-n>` 回到 Normal，`<C-o>` 进入 Normal 再执行一次命令。
+- 插件管理：`<leader>pl` 打开 Lazy。
+- 命令面板：`<C-q>` 打开 commander 列表。
+- 通知：`,;` 查看通知历史（Telescope），`<leader>c;` 清除通知。
 
-## 光标与文本操作
-- 移动：`u/e` 上/下行，`n/i` 左/右；`U/E` 上/下 5 行；`N/I` 行首/行尾。
-- 视口滚动：`Ctrl+u` 向上 5 行；`Ctrl+e` 向下 5 行。
-- 词移动：`h` 词尾；`W/B` 向前/后 5 个单词。
-- 撤销缩进：`l` 撤销；`<` 反缩进；`>` 缩进。
-- 占位跳转：`<Space><Space>` 跳到下一个 `<++>`。
-- 其他：`r` 编译/运行当前文件；`<Space>sc` 拼写建议切换；`<Space>dw` 查找相邻重复词；`<Space>tt` 4 空格→Tab；`<Space>o` 折叠；`<Space>-`/`<Space>+` 上/下一个 quickfix；`\\p` 显示当前文件路径；`<Space>/` 打开下方终端。
-- 可视模式：`Y` 复制到系统剪贴板。
+## 窗口 / 视图 / 状态
+- **NeoZoom**：`<leader>f` 切换放大窗口（与 LSP 格式化同键，见下方冲突）。
+- **Dropbar 面包屑**：`<leader>;` 选择节点；`[c` / `]c` 在上下文间移动；菜单内 `<CR>/i` 确认，`<esc>/q/n` 关闭。
+- **Undotree**：`L` 切换面板；面板内 `u/e` 前后状态，`U/E` 跳 5 步。
+- **Colorful-winsep**：无额外键位，自动美化分隔。
+- **Notify**：同“通知”部分。
 
-## 窗口 / 标签 / 终端
-- 分屏：`s u/e` 上/下水平分屏；`s n/i` 左/右垂直分屏；`s v/h` 设为竖/横；`s r v/h` 旋转布局为竖/横。
-- 窗口跳转：`<Space>w` 下一个；`<Space>n/i/u/e` 左/右/上/下。
-- 调整大小：方向键。
-- 关闭：`Q` 当前；`<Space>q` 关闭下方窗口（无则关闭当前）。
-- 标签：`t u` 新建；`t n/i` 左/右切换；`t m n/i` 左/右移动标签。
-- 终端：`Ctrl+n` 退出终端输入模式。
+## 搜索 / 跳转 / 替换
+- **Telescope**：
+  - `0` 模式：`<C-r>` 文件，`<C-w>` 缓冲区，`<C-h>` 最近文件，`<C-_>` 当前缓冲模糊查找，`z=` 拼写建议，`<leader>d` 按严重度列出诊断，`<leader>rs` 恢复上次搜索，`gi` Git status，`gp` 命令列表。
+  - 插件 `telescope-tabs`：`<C-f>` 列出 tabs（与 FZF 冲突）。
+  - Telescope 输入中：`<C-h>` which-key，`<C-u>/<C-e>` 上下选项，`<C-l>/<C-y>` 预览上下滚动，`<esc>` 关闭，`<C-n>/<C-p>` 历史切换。
+- **FZF-Lua**：
+  - Normal `<C-f>` 空字符串全局 grep；Visual `<C-f>` 以选区为搜索词。
+  - FZF 窗口内：`<C-f>` 全屏，`<C-r>` wrap 预览，`<C-p>` 切预览，`<C-y>/<C-l>` 预览翻页，`<C-e>/<C-u>` 结果上下，`Alt-a` 全选，`Esc` 退出。
+- **Flash.nvim**：`tt`（n/o/x）按 Treesitter 匹配跳转；`/`（o/x）闪跳搜索（覆盖原本 `/` 搜索）。
+- **nvim-hlslens**：`=` 下一处搜索结果、`-` 上一处；`*/#/g*/g#` 同步高亮。
+- **AnyJump**：Normal `y` 跳到定义，Visual `y` 区域跳转（覆盖默认 yank）。
+- **GrugFar**：`<leader>F` 打开全局查找替换。
 
-## 特殊功能
-- Figlet 文本：`t x` 输入文本后生成 ASCII 艺术。
-- 定制纵向跳转：`[` + `arstdhneio` 组合 + `Space` 上跳；`'` + 组合 + `Space` 下跳（最多 199 行，对应 1~0）。
+## LSP / 诊断
+- 定位与辅助：`<leader>h` hover，`gd/gD` 定义（gD 打开新 Tab），`gi` 实现，`go` 类型定义，`gr` 引用，插入 `<C-f>` 签名帮助。
+- 代码操作：`<leader>rn` 重命名，`<leader>aw` 或 `<leader>,` code action。
+- 诊断：`<leader>-` 上一条，`<leader>=` 下一条，`<leader>t` 打开 Trouble。
+- 格式化：`<leader>f` 触发 LSP format（与 NeoZoom 冲突）。
+- Trouble 窗口：`<esc>` 关闭，`u/e` 上下条。
 
-## Markdown 片段（UltiSnips）
-- `,n` 分隔线；`,b` 粗体；`,s` 删除线；`,i` 斜体；`,d` 行内代码；`,c` 代码块；`,m` 复选框；`,p` 图片；`,a` 链接；`,1`~`,4` 各级标题；`,l` 水平线。
-- `,f` 跳到下一个 `<++>`；`,w` 跳到 `<++>` 并回车。
+## Git
+- **Gitsigns**：`<leader>g-`/`<leader>g=` 上/下 hunk，`<leader>gb` 当前行 blame，`<leader>gr` 重置 hunk，`H` 预览 hunk（覆盖原本跳至窗口顶部）。
+- **LazyGit**：`<C-g>` 浮窗打开。
 
-# 插件与快捷键简表
-- **coc.nvim**（LSP 补全/跳转）：`gd/gr/gi/gy` 跳转；`<Space>rn` 重命名；`<Space>y` Yank 历史。
-- **coc-snippets**（片段引擎）：`Ctrl+e` 展开或下一个占位；`Ctrl+n` 上一个占位。
-- **coc-explorer**（文件树）：`tt` 打开；`?` 查看帮助。
-- **rnvimr**（Ranger 文件管理器，需要 ranger）：`R` 打开；`Ctrl+t/x/v` 新标签/上下分屏/左右分屏打开文件。
-- **fzf.vim**（模糊搜索）：`Ctrl+p` 文件；`Ctrl+w` 缓冲区；`Ctrl+f` 文件内容；`Ctrl+h` 最近文件；`Ctrl+t` Tags；`Ctrl+u/e` 上/下移列表。
-- **vim-xtabline**（标签栏增强）：`to` 切换标签模式；`\\p` 显示路径。
-- **vim-table-mode**（表格编辑）：`<Space>tm` 切换；`<Space>tr` 对齐。
-- **undotree**（撤销树）：`Shift+L` 打开；`u/e` 新/旧版本。
-- **vim-visual-multi**（多光标）：`Ctrl+k` 选下一个；`-`/`=` 选上/下；`q` 取消当前；`Esc` 退出。
-- **vim-surround**（包围/替换）：`ys` 添加包围，`cs` 更换，常用于引号/括号。
-- **vim-subversive**（替换操作符）：`s<motion>` 用寄存器内容替换目标文本（如 `skw` 替换单词）。
-- **vim-easy-align**（对齐）：`ga` + 分隔符 按符号对齐。
-- **vim-autoformat**（格式化）：`\\f` 格式化代码。
-- **vim-markdown-toc**（Markdown 目录）：`:Gen...` 生成目录。
-- **vista.vim**（符号大纲）：`T` 切换函数/变量列表。
-- **far.vim**（查找替换）：`<Space>fr` 在 cwd 搜索替换。
-- **flash.nvim**（Leap 风格跳转）：`tt`（normal/visual/operator）Treesitter 范围跳转；`/`（visual/operator）闪跳搜索，标签字母遵循 Colemak 序列。
-- **vim-gitgutter**（Git diff 行标记）：`H` 显示当前行 hunk；`<Space>g-`/`<Space>g+` 上/下个 hunk；`<Space>gf` 折叠非 hunk。
-- **fzf-gitignore**（生成 .gitignore）：`<Space>gi` 创建 `.gitignore`。
-- **calendar.vim**（日历/时钟）：`\\\\` 时钟；`\\c` 日历。
-- **goyo.vim**（专注模式）：`g y` 进入/退出沉浸模式。
-- **suda.vim**（提权写入）：`:sudowrite` 或 `:sw`。
-- **coc-translator**（翻译）：`t s` 翻译光标下单词。
+## 调试 (nvim-dap)
+- 断点与控制：`<leader>'t` 切换断点；`<leader>'n` 编译后继续；`<leader>'s` 单步；`<leader>'q` 终止。
+- UI：`<leader>'v` 悬停变量；`<leader>'u` 切换 dap-ui。
+
+## 编辑增强
+- **move.nvim**：Normal `<C-y>/<C-l>` 行下/上移；Visual `<C-e>/<C-u>` 选区下/上移（覆盖滚动）。
+- **substitute.nvim**：`s<motion>` 用寄存器替换；`sh` 以到单词结尾为范围；`ss` 整行替换；`sI` 替换到行尾；Visual `s` 区域替换（覆盖原生 `s`）。
+- **bullets.vim / autopairs / colorizer / ufo**：无自定义键位，自动生效。
+
+## Treesitter
+- 增量选择：`<C-n>` 初始化/扩大，`<C-h>` 收缩，`<C-l>` 扩大到作用域。
+- Treesitter Context：`[c` 跳到上方上下文行（与 Dropbar 同键）。
+
+## 剪贴板 / 历史
+- **Neoclip**：`<leader>y` 打开剪贴板历史（Telescope 视图）。Telescope 内：`<C-y>` 选中条目，`<CR>` 粘贴，`<C-g>` 向后粘贴，`<C-d>` 删除记录，`<C-k>` 编辑，`<C-q>` 重放宏。
+
+## 文件 / 终端工具
+- **Yazi 文件管理器**：`R` 在当前文件路径打开浮窗；Yazi 内：`<F1>` 帮助，`<C-v>/<C-x>/<C-t>` 垂直/水平/标签页打开，`<C-f>` 目录内 grep，`<C-r>` 目录内替换，`<Tab>` 切缓冲区，`<C-y>` 复制相对路径，`<C-q>` 发送 quickfix。
+- **Windowed LSP Breadcrumbs / 状态栏 / 颜色方案**：无额外键位。
+
+## 多光标 (vim-visual-multi)
+- 入口：`<leader>sa` 选中全部；`<C-k>` 选中下一个匹配（Find Under/Subword）。
+- 移动/控制：`q` 删除当前光标，`<C-n>` 跳过匹配，`l` 撤销，`<C-r>` 重做。运动键已重映射为 Colemak 方向（`h/j/k/l` 等）。
+
+## Git / Yank 以外的常见覆盖
+- `y` 被 AnyJump 占用，如需普通 yank 可改用 `yy/yk/yiw` 等显式命令。
+- `=` / `-` 不再是缩进调整，而是搜索导航。
+- `H` 不再跳转窗口顶部，而是显示 hunk。
+- `R` 不再进入 Replace 模式，而是打开 Yazi。
+
+## 已知冲突与建议
+- `<leader>f` 同时绑定 LSP 格式化和 NeoZoom：建议将 NeoZoom 改成 `<leader>zf` 或在无 LSP 缓冲区使用 `gq`/`:Format`。
+- `<C-f>` 在 Normal 模式同时触发 FZF 全局 grep 与 Telescope Tabs，实测后加载顺序决定行为，建议保留其一（例如 Tabs 换成 `<leader>tt`）。
+- `[c`/`]c` 由 Dropbar 与 Treesitter Context 共用，容易相互覆盖，可将其中一个改成 `<leader>[c` / `<leader>]c`。
+- `y` 被 AnyJump 抢占会影响肌肉记忆，可考虑改为 `<leader>j` 或在 AnyJump 中设置 `g:any_jump_disable_default_keybindings = 1` 后自定义。
+- 移动/滚动覆盖：Normal/Visual `<C-u>/<C-e>`、`H`、`=`、`-` 等均与 Vim 默认不同，团队使用时需说明，或加哪怕一行注释以自提醒。
+- 终端/插入态 `<C-u>` 也被覆盖，如需要原生删除到行首，可为原功能另设 `<C-S-u>` 等备用键。

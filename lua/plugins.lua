@@ -18,15 +18,14 @@ local lazy_keys = {
 	{ cmd = "sync",    key = "s" },
 	{ cmd = "clean",   key = "cl" },
 	{ cmd = "check",   key = "ch" },
-	{ cmd = "log",     key = "l" },
+	{ cmd = "log",     key = "p" },
 	{ cmd = "restore", key = "rs" },
-	{ cmd = "profile", key = "p" },
-	{ cmd = "profile", key = "p" },
+	{ cmd = "profile",  key = "p" },
 }
-for _, v in ipairs(lazy_keys) do
-	lazy_cmd[v.cmd].key = "<SPC>" .. v.key
-	lazy_cmd[v.cmd].key_plugin = "<leader>" .. v.key
-end
+-- for _, v in ipairs(lazy_keys) do
+-- 	-- lazy_cmd[v.cmd].key = "<SPC>" .. v.key
+-- 	-- lazy_cmd[v.cmd].key_plugin = "<leader>" .. v.key
+-- end
 vim.keymap.set("n", "<leader>pl", ":Lazy<CR>", { noremap = true })
 
 require("lazy").setup({
@@ -56,7 +55,7 @@ require("lazy").setup({
 	require("plugins.window-management"),
 	require("plugins.undo"),
 	require("plugins.fun"),
-	require("plugins.winbar"),
+	-- require("plugins.winbar"),
 	require("plugins.leap"),
 	require("plugins.yazi"),
 	{ "dstein64/vim-startuptime" },

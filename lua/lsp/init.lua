@@ -86,17 +86,18 @@ local format_on_save_filetypes = {
 	python = true,
 }
 
+
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.py",
 	callback = function()
 		if format_on_save_filetypes[vim.bo.filetype] then
-			local lineno = vim.api.nvim_win_get_cursor(0)
-			vim.lsp.buf.format({ async = false })
+			-- local lineno = vim.api.nvim_win_get_cursor(0)
 			vim.lsp.buf.code_action({
 				context = { only = { "source.fixAll.ruff" }, diagnostics = {} },
 				apply = true,
 			})
-			pcall(vim.api.nvim_win_set_cursor, 0, lineno)
+			vim.lsp.buf.format({ async = false })
+			-- pcall(vim.api.nvim_win_set_cursor, 0, lineno)
 		end
 	end,
 })

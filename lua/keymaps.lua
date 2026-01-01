@@ -1,15 +1,21 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ','
-
--- local mode_nv = { "n", "v" }
--- local mode_v = { "v" }
+vim.g.myvimrc = vim.fn.stdpath('config') .. '/init.lua'
+vim.env.MYVIMRC = vim.g.myvimrc
+local mode_nv = { "n", "v" }
+local mode_v = { "v" }
 -- local mode_i = { "i" }
--- local nmappings = {
--- 	{ from = "D",             to = ":w<CR>" },
--- 	{ from = "Q",             to = ":q<CR>" },
+local nmappings = {
+	{ from = "S",             to = ":w<CR>:w<CR>" },
+	{ from = "Q",             to = ":q<CR>" },
 -- 	{ from = "p",             to = ":",                                                                   mode = mode_nv },
--- 	{ from = "O",             to = "\"+y",                                                                mode = mode_v },
--- 	{ from = "`",             to = "~",                                                                   mode = mode_nv },
+	{ from = "O",             to = "\"+y",                                                                mode = mode_v },
+	{ from = "`",             to = "~",                                                                   mode = mode_nv },
+	{ from = '>',             to = '>gv',                                                                   mode = mode_v },
+	{ from = '<',             to = '<gv',                                                                   mode = mode_v },
+	{ from = "`",             to = "~",                                                                   mode = mode_nv },
+	{ from = "g`",             to = "g~",                                                                 mode = mode_nv },
+	{ from = "R",             to = ":source $MYVIMRC | echo 'Configuration Reloaded!'<CR>",        mode = mode_nv },
 
 -- 	-- Movement
 -- 	{ from = "i",             to = "k",                                                                   mode = mode_nv },
@@ -43,21 +49,21 @@ vim.g.maplocalleader = ','
 -- 	{ from = "<c-a>",         to = "<ESC>A",                                                              mode = mode_i },
 
 -- 	-- Window & splits
--- 	{ from = "<leader>w",     to = "<C-w>w", },
--- 	{ from = "<leader>i",     to = "<C-w>k", },
--- 	{ from = "<leader>k",     to = "<C-w>j", },
--- 	{ from = "<leader>j",     to = "<C-w>h", },
--- 	{ from = "<leader>l",     to = "<C-w>l", },
--- 	{ from = "qe",            to = "<C-w>o", },
--- 	{ from = "d",             to = "<nop>", },
--- 	{ from = "di",            to = ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>", },
--- 	{ from = "dk",            to = ":set splitbelow<CR>:split<CR>", },
--- 	{ from = "dj",            to = ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>", },
--- 	{ from = "dl",            to = ":set splitright<CR>:vsplit<CR>", },
--- 	{ from = "<up>",          to = ":res +5<CR>", },
--- 	{ from = "<down>",        to = ":res -5<CR>", },
--- 	{ from = "<left>",        to = ":vertical resize-5<CR>", },
--- 	{ from = "<right>",       to = ":vertical resize+5<CR>", },
+	{ from = "<leader>w",     to = "<C-w>w", },
+	{ from = "<leader>k",     to = "<C-w>k", },
+	{ from = "<leader>j",     to = "<C-w>j", },
+	{ from = "<leader>h",     to = "<C-w>h", },
+	{ from = "<leader>l",     to = "<C-w>l", },
+	{ from = "qe",            to = "<C-w>o", },
+	-- { from = "d",             to = "<nop>", },
+	{ from = "sk",            to = ":set nosplitbelow<CR>:split<CR>:set splitbelow<CR>", },
+	{ from = "sj",            to = ":set splitbelow<CR>:split<CR>", },
+	{ from = "sh",            to = ":set nosplitright<CR>:vsplit<CR>:set splitright<CR>", },
+	{ from = "sl",            to = ":set splitright<CR>:vsplit<CR>", },
+	{ from = "<up>",          to = ":res +5<CR>", },
+	{ from = "<down>",        to = ":res -5<CR>", },
+	{ from = "<left>",        to = ":vertical resize-5<CR>", },
+	{ from = "<right>",       to = ":vertical resize+5<CR>", },
 -- 	-- { from = "dh",            to = "se", },
 -- 	-- { from = "dh",            to = "<C-w>t<C-w>K", },
 -- 	-- { from = "dv",            to = "<C-w>t<C-w>H", },
@@ -86,14 +92,14 @@ vim.g.maplocalleader = ','
 
 -- 	-- Joshuto
 -- 	{ from = "S",             to = ":Joshuto<CR>" },
--- }
+}
 
 -- vim.keymap.set("n", "q", "<nop>", { noremap = true })
 -- vim.keymap.set("n", ",q", "q", { noremap = true })
 
--- for _, mapping in ipairs(nmappings) do
--- 	vim.keymap.set(mapping.mode or "n", mapping.from, mapping.to, { noremap = true })
--- end
+for _, mapping in ipairs(nmappings) do
+	vim.keymap.set(mapping.mode or "n", mapping.from, mapping.to, { noremap = true})
+end
 
 -- local function run_vim_shortcut(shortcut)
 -- 	local escaped_shortcut = vim.api.nvim_replace_termcodes(shortcut, true, false, true)

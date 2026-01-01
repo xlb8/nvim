@@ -108,7 +108,7 @@ return {
 				},
 			})
 			vim.keymap.set("n", "s", substitute.operator, { noremap = true })
-			vim.keymap.set("n", "sh", function() substitute.operator({ motion = "e" }) end, { noremap = true })
+			vim.keymap.set("n", "sb", function() substitute.operator({ motion = "e" }) end, { noremap = true })
 			vim.keymap.set("x", "s", require('substitute.range').visual, { noremap = true })
 			vim.keymap.set("n", "ss", substitute.line, { noremap = true })
 			vim.keymap.set("n", "sI", substitute.eol, { noremap = true })
