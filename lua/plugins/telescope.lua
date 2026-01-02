@@ -70,8 +70,6 @@ M.config = {
 			vim.keymap.set('n', 'gi', builtin.git_status, m)
 			vim.keymap.set("n", "gp", builtin.commands, m)
 
-			local trouble = require("trouble.providers.telescope")
-
 			local ts = require('telescope')
 			local actions = require('telescope.actions')
 			M.ts = ts

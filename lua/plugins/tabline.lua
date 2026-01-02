@@ -3,7 +3,9 @@ return {
 	dependencies = 'nvim-tree/nvim-web-devicons',
 	opts = {
 		options = {
-			mode = "tabs",
+			-- 显示所有已打开的 buffer，而不仅是 tab
+			mode = "buffers",
+			-- mode = "tabs",
 			diagnostics = "nvim_lsp",
 			diagnostics_indicator = function(count, level, diagnostics_dict, context)
 				local icon = level:match("error") and " " or " "

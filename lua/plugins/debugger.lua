@@ -69,14 +69,14 @@ return {
 			})
 			vim.fn.sign_define('DapStopped', { text = '', texthl = 'DapStopped', linehl = 'DapStopped', numhl = 'DapStopped' })
 
-			dap.adapters.codelldb = {
-				type = 'server',
-				port = "${port}",
-				executable = {
-					command = vim.g.codelldb_path,
-					args = { "--port", "${port}" },
-				}
-			}
+			-- dap.adapters.codelldb = {
+			-- 	type = 'server',
+			-- 	port = "${port}",
+			-- 	executable = {
+			-- 		command = vim.g.codelldb_path,
+			-- 		args = { "--port", "${port}" },
+			-- 	}
+			-- }
 			dap.configurations.cpp = {
 				{
 					name = "Launch file",

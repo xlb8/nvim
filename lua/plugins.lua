@@ -1,4 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
@@ -9,23 +10,9 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
+
 vim.opt.rtp:prepend(lazypath)
 
-local lazy_cmd = require("lazy.view.config").commands
-local lazy_keys = {
-	{ cmd = "install", key = "i" },
-	{ cmd = "update",  key = "u" },
-	{ cmd = "sync",    key = "s" },
-	{ cmd = "clean",   key = "cl" },
-	{ cmd = "check",   key = "ch" },
-	{ cmd = "log",     key = "p" },
-	{ cmd = "restore", key = "rs" },
-	{ cmd = "profile",  key = "p" },
-}
--- for _, v in ipairs(lazy_keys) do
--- 	-- lazy_cmd[v.cmd].key = "<SPC>" .. v.key
--- 	-- lazy_cmd[v.cmd].key_plugin = "<leader>" .. v.key
--- end
 vim.keymap.set("n", "<leader>pl", ":Lazy<CR>", { noremap = true })
 
 require("lazy").setup({
@@ -47,7 +34,7 @@ require("lazy").setup({
 	require("plugins.wilder"),
 	require("plugins.multi-cursor"),
 	-- require("plugins.copilot"),
-	-- require("plugins.markdown"),
+	require("plugins.markdown"),
 	require("plugins.git"),
 	-- require("plugins.indent"),
 	require("plugins.search"),
@@ -55,11 +42,26 @@ require("lazy").setup({
 	require("plugins.window-management"),
 	require("plugins.undo"),
 	require("plugins.fun"),
-	-- require("plugins.winbar"),
+	require("plugins.winbar"),
 	require("plugins.leap"),
 	require("plugins.yazi"),
-	{ "dstein64/vim-startuptime" },
-}, {
+	{ 
+		"dstein64/vim-startuptime",
+	},
+	{
+		"nvim-neorg/neorg",
+		enabled = false,  -- 直接禁用，不加载这个插件
+		lazy = false,
+		rocks = {
+		"nvim-nio ~> 1.7",
+		"lua-utils.nvim == 1.0.2",
+		"plenary.nvim == 0.1.4",
+		"nui.nvim == 0.3.0",
+		"pathlib.nvim ~> 2.2",
+		},
+		build = false, -- disable the build script that currently uses luarocks.nvim
+		opts = {},
+  	}
 })
 
 -- require("custom_plugins.vertical_cursor_movement")

@@ -8,9 +8,6 @@ return {
 			desc = "Open yazi at the current file",
 		},
 	},
-	dependencies = {
-    	"MunifTanjim/nui.nvim", -- 必须有这个！
-  	},
 	opts = {
 		floating_window_scaling_factor = 1,
 		yazi_floating_window_border = "none",

@@ -68,20 +68,37 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		end
 	end
 })
-
--- Load server configurations
 require('lsp.servers.lua').setup()
-require('lsp.servers.python').setup()
-
-require('mason').setup({})
 require('mason-lspconfig').setup({
-	-- ensure_installed = {
-	-- 	"pyright",
-	-- },
+	ensure_installed = {
+		"lua_ls",
+		"basedpyright",
+		"ruff"
+	},
 	automatic_enable = true,
 })
 
--- Format on save
+vim.lsp.config('ruff', {
+	init_options = {
+		settings = {
+			-- 关键设置：告诉 Ruff 优先读取文件系统中的配置文件
+			-- 如果找到了 pyproject.toml，它会覆盖或根据规则合并这里的 settings
+			configurationPreference = "filesystemFirst",
+			
+			lint = {
+				-- 这些是你希望在没有文件时生效的默认值
+				extendSelect = { "I",},
+				ignore = { "F401", "F403", "F405" },
+				unfixable = { "F401" },
+			},
+			logLevel = "debug",
+		}
+	}
+})
+
+vim.lsp.enable('basedpyright')
+vim.lsp.enable('ruff')
+
 local format_on_save_filetypes = {
 	python = true,
 }

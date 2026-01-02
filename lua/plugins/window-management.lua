@@ -1,8 +1,17 @@
 return {
 	{
 		"nvim-zh/colorful-winsep.nvim",
-		config = true,
-		event = { "WinNew" },
+		config = function()
+			require("colorful-winsep").setup({
+			animate = {
+				enabled = false,  -- 关闭动画
+			},
+			-- 下面是可选项，根据你自己的需求添加
+			-- border = "bold",
+			-- excluded_ft = { "packer", "TelescopePrompt", "mason" },
+			})
+		end,
+		event = { "WinNew" }
 	},
 	{
 		"nyngwang/NeoZoom.lua",
