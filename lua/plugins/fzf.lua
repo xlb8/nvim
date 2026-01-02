@@ -2,7 +2,10 @@ local m = { noremap = true }
 return {
 	"ibhagwan/fzf-lua",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	keys = { "<c-f>" },
+	keys = { 
+        { "<c-f>", desc = "Fzf Grep" },
+        { "<leader>b", "<cmd>FzfLua buffers<cr>", desc = "Fzf Buffers" } 
+    },
 	config = function()
 		local fzf = require('fzf-lua')
 		vim.keymap.set('n', '<c-f>', function()
@@ -11,7 +14,16 @@ return {
 		end, m)
 		vim.keymap.set('x', '<c-f>', function()
 			-- fzf.live_grep_resume({ multiprocess = true, debug = true })
-			fzf.grep_visual({ fzf_opts = { ['--layout'] = 'default' } })
+			fzf.grep_visual({ 
+				rg_opts = "--column --line-number --smart-case --color=always --multiline -U",
+				fzf_opts = { ['--layout'] = 'default' } })
+			end, m)
+		vim.keymap.set('n', '<leader>b', function()
+			fzf.buffers({
+				-- 这里的设置可以让它默认选中当前 buffer (如果需要的话)
+				-- 但通常 fzf-lua 默认就支持用快捷键在列表里删掉它们
+				winopts = { height=0.4, width=0.6 }
+			})
 		end, m)
 		fzf.setup({
 			global_resume = true,
@@ -49,8 +61,8 @@ return {
 					["f4"]         = "toggle-preview",
 					["shift-down"] = "preview-page-down",
 					["shift-up"]   = "preview-page-up",
-					["ctrl-e"]     = "down",
-					["ctrl-u"]     = "up",
+					["ctrl-j"]     = "down",
+					["ctrl-k"]     = "up",
 				},
 			},
 			previewers = {

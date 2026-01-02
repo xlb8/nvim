@@ -49,6 +49,7 @@ local nmappings = {
 -- 	{ from = "<c-a>",         to = "<ESC>A",                                                              mode = mode_i },
 
 -- 	-- Window & splits
+	{ from = "<leader>e",     to = ":bd<CR>",      mode = mode_nv},
 	{ from = "<leader>w",     to = "<C-w>w", },
 	{ from = "<leader>k",     to = "<C-w>k", },
 	{ from = "<leader>j",     to = "<C-w>j", },
@@ -64,25 +65,31 @@ local nmappings = {
 	{ from = "<down>",        to = ":res -5<CR>", },
 	{ from = "<left>",        to = ":vertical resize-5<CR>", },
 	{ from = "<right>",       to = ":vertical resize+5<CR>", },
--- 	-- { from = "dh",            to = "se", },
--- 	-- { from = "dh",            to = "<C-w>t<C-w>K", },
--- 	-- { from = "dv",            to = "<C-w>t<C-w>H", },
--- 	{ from = "dsh",           to = "<C-w>b<C-w>K", },
--- 	{ from = "dsv",           to = "<C-w>b<C-w>H", },
+	-- { from = "dh",            to = "se", },
+	-- m for top window n for bottom window
+	-- k for move2 top h for move2left
+	{ from = "mk",            to = "<C-w>t<C-w>K", },
+	{ from = "mh",            to = "<C-w>t<C-w>H", },
+	{ from = "nk",           to = "<C-w>b<C-w>K", },
+	{ from = "nh",           to = "<C-w>b<C-w>H", },
 
--- 	-- Tab management
--- 	{ from = "fi",            to = ":tabe<CR>", },
--- 	{ from = "fI",            to = ":tab split<CR>", },
--- 	{ from = "fj",            to = ":-tabnext<CR>", },
--- 	{ from = "fl",            to = ":+tabnext<CR>", },
--- 	{ from = "fmj",           to = ":-tabmove<CR>", },
--- 	{ from = "fml",           to = ":+tabmove<CR>", },
+	-- Tab management
+	-- [ for tab
+	-- jk for swich
+	-- hl for move  -- less use
+	-- buitin gt, gT == [j, [k
+	{ from = "[t",            to = ":tabe<CR>", },
+	-- { from = "[o",            to = ":tab split<CR>", },
+	{ from = "[o",            to = "<C-w>T", },
+	{ from = "[j",            to = ":-tabnext<CR>", },
+	{ from = "[k",            to = ":+tabnext<CR>", },
+	{ from = "[h",           to = ":-tabmove<CR>", },
+	{ from = "[l",           to = ":+tabmove<CR>", },
 
 -- 	-- Other
 -- 	{ from = "<leader>dw",    to = ":set wrap<CR>" },
 -- 	{ from = "<leader>dc",    to = ":set spell!<CR>" },
--- 	{ from = "<leader><CR>",  to = ":nohlsearch<CR>" },
--- 	{ from = "<f10>",         to = ":TSHighlightCapturesUnderCursor<CR>" },
+	{ from = "<leader><CR>",  to = ":nohlsearch<CR>" },
 -- 	{ from = "<leader>;",     to = "za" },
 -- 	{ from = "<leader>rs",    to = ":profile start profile.log<CR>:profile func *<CR>:profile file *<CR>" },
 -- 	{ from = "<leader>sc",    to = ":e ~/.config/nvim/init.lua<CR>" },

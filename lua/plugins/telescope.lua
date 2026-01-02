@@ -14,7 +14,7 @@ M.config = {
 					local tstabs = require('telescope-tabs')
 					tstabs.setup({
 					})
-					vim.keymap.set('n', '<c-f>', tstabs.list_tabs, {})
+					-- vim.keymap.set('n', '<c-f>', tstabs.list_tabs, {})
 				end
 			},
 			{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
@@ -99,8 +99,8 @@ M.config = {
 					mappings = {
 						i = {
 							["<C-h>"] = "which_key",
-							["<C-u>"] = "move_selection_previous",
-							["<C-e>"] = "move_selection_next",
+							["<C-k>"] = "move_selection_previous",
+							["<C-j>"] = "move_selection_next",
 							["<C-l>"] = "preview_scrolling_up",
 							["<C-y>"] = "preview_scrolling_down",
 							["<esc>"] = "close",
@@ -131,9 +131,13 @@ M.config = {
 					},
 					buffers = {
 						show_all_buffers = true,
+						ignore_current_buffer = false,
 						sort_lastused = true,
 						mappings = {
 							i = {
+								["<c-d>"] = actions.delete_buffer,
+							},
+							n = {
 								["<c-d>"] = actions.delete_buffer,
 							},
 						}

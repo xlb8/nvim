@@ -171,20 +171,20 @@ M.configfunc = function()
 				end,
 				{ "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
 			),
-			["<c-n>"] = cmp.mapping(
-				function(fallback)
-					cmp_ultisnips_mappings.jump_backwards(fallback)
-				end,
-				{ "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
-			),
+			-- ["<c-n>"] = cmp.mapping(
+			-- 	function(fallback)
+			-- 		cmp_ultisnips_mappings.jump_backwards(fallback)
+			-- 	end,
+			-- 	{ "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
+			-- ),
 			['<c-f>'] = cmp.mapping({
 				i = function(fallback)
 					cmp.close()
 					fallback()
 				end
 			}),
-			['<c-y>'] = cmp.mapping({ i = function(fallback) fallback() end }),
-			['<c-u>'] = cmp.mapping({ i = function(fallback) fallback() end }),
+			-- ['<c-y>'] = cmp.mapping({ i = function(fallback) fallback() end }),
+			-- ['<c-u>'] = cmp.mapping({ i = function(fallback) fallback() end }),
 			['<CR>'] = cmp.mapping({
 				i = function(fallback)
 					if cmp.visible() and cmp.get_active_entry() then

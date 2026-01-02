@@ -1,5 +1,4 @@
 return {
-	-- {"nvim-treesitter/playground"},
 	{
 		"nvim-treesitter/nvim-treesitter",
 		lazy = false,
@@ -37,6 +36,10 @@ return {
 		"nvim-treesitter/nvim-treesitter-context",
 		config = function()
 			local tscontext = require('treesitter-context')
+			-- no bird use for me
+			-- vim.keymap.set("n", "[c", function()
+			-- 	tscontext.go_to_context(vim.v.count1)
+			-- end, { silent = true })
 			tscontext.setup {
 				enable = true,
 				max_lines = 0,        -- How many lines the window should span. Values <= 0 mean no limit
@@ -51,9 +54,7 @@ return {
 				zindex = 20, -- The Z-index of the context window
 				on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 			}
-			vim.keymap.set("n", "[c", function()
-				tscontext.go_to_context()
-			end, { silent = true })
+
 		end
 	},
 }
